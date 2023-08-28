@@ -22,13 +22,21 @@ public_users.post("/register", (req,res) => {
 // Get the book list available in the shop
 public_users.get('/',function (req, res) {
   //return res.status(300).json({message: "Yet to be implemented"});
-  res.send(JSON.stringify(books, null, 4));
+  let myPromise = new Promise((resolve,reject) => {
+    setTimeout(() => {
+      resolve(res.send(JSON.stringify(books, null, 4)));
+    },5000)})
+    myPromise;
 });
 
 // Get book details based on ISBN
 public_users.get('/isbn/:isbn',function (req, res) {
   const isbn = req.params.isbn;
-  res.send(books[isbn]);
+  let myPromise = new Promise((resolve,reject) => {
+    setTimeout(() => {
+      resolve(res.send(books[isbn]));
+    },5000)})
+    myPromise;
   //return res.status(300).json({message: "Yet to be implemented"});
  });
   
@@ -37,10 +45,16 @@ public_users.get('/author/:author',function (req, res) {
   //return res.status(300).json({message: "Yet to be implemented"});
   const author = req.params.author;
   for(var key in books){
-      //isbns.push(books[key]);
-      if(books[key].author===author){
-        return res.send(books[key]);
-      }
+    //isbns.push(books[key]);
+    if(books[key].author===author){
+        let myPromise = new Promise((resolve,reject) => {
+            setTimeout(() => {
+                resolve(
+                    res.send(books[key])
+                );
+            },5000)})
+        myPromise;
+    }
   }
 });
 
@@ -49,10 +63,16 @@ public_users.get('/title/:title',function (req, res) {
   //return res.status(300).json({message: "Yet to be implemented"});
   const title = req.params.title;
   for(var key in books){
-      //isbns.push(books[key]);
-      if(books[key].title===title){
-        return res.send(books[key]);
-      }
+    //isbns.push(books[key]);
+    if(books[key].title===title){
+        let myPromise = new Promise((resolve,reject) => {
+            setTimeout(() => {
+                resolve(
+                    res.send(books[key])
+                );
+        },5000)})
+        myPromise;
+    }
   }
 });
 
